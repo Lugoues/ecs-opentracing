@@ -1,0 +1,76 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "frontend",
+      "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/demoapp:latest",
+      "memory": 1024,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "ecs-log-streaming-zipkin",
+          "awslogs-region": "us-east-1"
+        }
+      },
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort":8080,
+          "hostPort":8080,
+          "protocol": "tcp"
+        }
+      ],
+      "links": [
+        "backend",
+        "zipkin-server"
+      ]
+    },
+    {
+    "name": "backend",
+    "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest",
+    "memory":1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming-zipkin",
+        "awslogs-region": "us-east-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":8090,
+        "hostPort":8090,
+        "protocol": "tcp"
+      }
+    ],
+    "links": [
+      "zipkin-server"
+    ]
+    },
+    {
+    "name": "zipkin-server",
+    "image": "openzipkin/zipkin",
+    "memory":1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming-zipkin",
+        "awslogs-region": "us-east-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":9411,
+        "hostPort":9411,
+        "protocol": "tcp"
+      }
+    ]
+    }
+  ],
+  "volumes": [],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "zipkin-stack"
+}
+

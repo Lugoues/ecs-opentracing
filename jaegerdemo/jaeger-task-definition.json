@@ -1,0 +1,102 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "jaegerapp",
+      "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/jaegerapp:latest",
+      "memory":1024,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "ecs-log-streaming",
+          "awslogs-region": "us-east-1"
+        }
+      },
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort":5000,
+          "hostPort":5000,
+          "protocol": "tcp"
+        }
+      ],
+      "links": [
+        "jaeger",
+        "apptracingpy_db"
+      ]
+    },
+    {
+    "name": "apptracingpy_db",
+    "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/psql-data:latest",
+    "memory":1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming",
+        "awslogs-region": "us-east-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":5432,
+        "hostPort":5432,
+        "protocol": "tcp"
+      }
+    ],
+    "links": [
+      "jaeger"
+    ]
+    },
+    {
+    "name": "jaeger",
+    "image": "jaegertracing/all-in-one:latest",
+    "memory": 1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming",
+        "awslogs-region": "us-east-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":5775,
+        "hostPort":5775,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":5778,
+        "hostPort":5778,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":6831,
+        "hostPort":6831,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":6832,
+        "hostPort":6832,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":14268,
+        "hostPort":14268,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort":16686,
+        "hostPort":16686,
+        "protocol": "tcp"
+      }
+
+    ]
+    }
+  ],
+  "volumes": [],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "jaeger-stack"
+}
+
