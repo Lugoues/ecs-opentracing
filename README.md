@@ -1,4 +1,8 @@
-## Opentracing
+## License
+
+This library is licensed under the Apache 2.0 License.
+ 
+ ## Opentracing on Amazon EC2 Container Service (ECS) 
 Opentracing is a vendor-neutral open standard for distributed tracing. Please see http://opentracing.io for more details. Trace distributed applications written in Java and Python deployed on Amazon EC2 Container Service (ECS) using Opentracing providers like OpenZipkin and Jaeger. Libraries are currently available in 9 languages like Go, JavaScript, Java, Python, Ruby, PHP, Objective-C, C++, C#.
 
 Running a single container on a single server is easy. ECS is a cluster management service that helps you manage a group of clusters through a graphical user interface or by accessing a command line. With ECS you can install, operate, and scale your own cluster management infrastructure.
