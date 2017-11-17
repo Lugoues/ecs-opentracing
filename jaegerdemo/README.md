@@ -9,8 +9,8 @@ git clone https://github.com/aws-samples/ecs-opentracing
 
 ## Create an AWS key Pair
 ```
-aws --region us-east-1 ec2 create-key-pair --key-name ecs-opentrace-key1 --query 'KeyMaterial' --output text > ecs-opentrace-key1.pem
-chmod 400 ecs-opentrace-key1.pem
+aws --region us-east-1 ec2 create-key-pair --key-name ecs-opentrace-key2 --query 'KeyMaterial' --output text > ecs-opentrace-key2.pem
+chmod 400 ecs-opentrace-key2.pem
 aws --region us-east-1 ec2 describe-key-pairs
 ```
 
@@ -19,30 +19,32 @@ Create the ECS cluster using the [AWS ECS CLI](http://docs.aws.amazon.com/Amazon
 
 ```
 ecs-cli configure -cluster ecs-opentracing-jaeger --region us-east-1
-ecs-cli up --keypair ecs-opentrace-key1 --capability-iam --size 1 --instance-type t2.medium --port 22 --force
+ecs-cli up --keypair ecs-opentrace-key2 --capability-iam --size 1 --instance-type t2.medium --port 22 --force
 ```
 
-## Create an ECR registry for the Database and Application
-Using the AWS management console or AWS CLI, create two ECR Registry entries: **psql-data** and **jaegerapp** to store the Docker images and note down the Registry names.
+## Create an Amazon EC2 Container Registry (ECR) registry for the Database Microservice and the Python application Microservice
+Using the AWS management console or AWS CLI, create two ECR Registry entries: **psql-data** and **jaegerapp** to store the Docker images.
 
-1. In the ECS console under Repositories, choose Get Started or Create repository.
-2. Enter a name for the repository, for example: **psql-data and jaegerapp**
-3. Choose Next step and follow the instructions.
+```
+aws ecr create-repository --repository-name psql-data
+aws ecr create-repository --repository-name jaegerapp
+```
 
-## Build and push the Database Image on Amazon EC2 Container Registry (ECR)
+## Build and push the Database Image to ECR
 ```
 cd jaegerdemo
 cd db
 aws ecr get-login --no-include-email --region us-east-1
 
-Run the docker login command that was returned in the previous step.
+<<Run the docker login command that was returned in the previous step>>
 
 docker build -t psql-data .
+aws ecr describe-repositories
 docker tag psql-data:latest <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/psql-data:latest
 docker push <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/psql-data:latest
 ```
 
-## Build and push the Python application image on ECR
+## Build and push the Python application image to ECR
 ```
 cd jaegerdemo
 cd app
