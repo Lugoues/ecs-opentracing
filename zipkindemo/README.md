@@ -14,7 +14,7 @@ aws --region us-east-1 ec2 describe-key-pairs
 ```
 
 ## Create an ECS Cluster
-Launch the ECS cluster with one EC2 instance which has more than 3 GB of memory, as three containers are launched, where each container has 1 GB of memory allocated in the [ECS taskdefinition](https://github.com/aws-samples/ecs-opentracing/blob/master/zipkindemo/zipkinapp-taskdefinition.json).
+Create the ECS cluster using the [AWS ECS CLI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html) with one EC2 instance which has more than 3 GB of memory, as three containers are launched, where each container has 1 GB of memory allocated in the [ECS taskdefinition](./zipkinapp-taskdefinition.json).
 
 ```
 ecs-cli configure -cluster ecs-opentracing-demo1 --region us-east-1
@@ -59,7 +59,7 @@ docker push <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest
 
 ## Create and register a task definition
 
-Note: Go to the zipkindemo directory and update the [ECS taskdefinition](https://github.com/aws-samples/ecs-opentracing/blob/master/zipkindemo/zipkinapp-taskdefinition.json) file with the correct ECR image ids.
+Note: Go to the zipkindemo directory and update the [ECS taskdefinition](./zipkinapp-taskdefinition.json) file with the correct ECR image ids.
 
 ```
 aws ecs register-task-definition --cli-input-json file://zipkinapp-taskdefinition.json
