@@ -1,5 +1,5 @@
 ## Opentracing of a Python application using Jaeger on Amazon ECS
-The Python app is based on https://github.com/bryanl/apptracing-py with changes to make it completely Dockerized. The Python web application running on ECS, uses various modules like Flask, jaeger-client and accesses data in a Postgresql database running in another Docker container on ECS. Finally, Jaeger runs in another container on ECS. This demo assumes that everything is being deployed in **us-east-1** AWS Region. 
+The Python app is based on https://github.com/bryanl/apptracing-py with changes to make it completely Dockerized. The Python web application running on ECS, uses various python modules like flask, jaeger-client and accesses data in a Postgresql database running in another Docker container on ECS. Finally, Jaeger runs in another container on ECS. This demo assumes that everything is being deployed in **us-east-1** AWS Region. 
 Jaeger, inspired by [Dapper](https://research.google.com/pubs/pub36356.html) and OpenZipkin, is a distributed tracing system released as open source by Uber Technologies and more details can be found at https://github.com/jaegertracing/jaeger. This demo uses the **jaegertracing/all-in-one** Docker image, where all components run in a single container. Jaeger also supports Cassandra 3.x, ElasticSearch as persistent storage.
 
 ## Clone the git repository
@@ -15,7 +15,7 @@ aws --region us-east-1 ec2 describe-key-pairs
 ```
 
 ## Create an ECS Cluster
-Launch the ECS cluster with one EC2 instance which has more than 3 GB of memory, as three containers are launched, where each container has 1 GB of memory allocated in the [ECS taskdefinition](https://github.com/aws-samples/ecs-opentracing/blob/master/jaegerdemo/jaeger-task-definition.json).
+Create the ECS cluster using the [AWS ECS CLI](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ECS_CLI_installation.html) with one EC2 instance which has more than 3 GB of memory, as three containers are launched, where each container has 1 GB of memory allocated in the [ECS taskdefinition](./jaeger-task-definition.json).
 
 ```
 ecs-cli configure -cluster ecs-opentracing-jaeger --region us-east-1
