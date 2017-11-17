@@ -80,7 +80,7 @@ aws ecs run-task --cluster ecs-opentracing-demo1  --task-definition zipkin-stack
 ```
 
 ## Test the applications 
-Note: Make sure the security groups are open for Inbound to the Zipkin and Application ports:8080,8090,9411 in the EC2 instance of the ECS Cluster
+Note: Make sure the security groups are open for Inbound to the Zipkin and Application TCP ports: 8080,8090,9411 in the EC2 instance of the ECS Cluster
 
 ```
 Test the Applications and generate some traffic -
