@@ -19,10 +19,11 @@ This github repo demonstrates tracing of two sample applications, one in Java an
 You will need to have the latest version of the AWS CLI and the following software:
 
 1. [Installing the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
-2. [Installing Gradle](https://gradle.org/install/) - For Java apps
-3. [Installing Docker](https://docs.docker.com/engine/installation/)
-4. [Installing Python](https://www.python.org/downloads/) - For Python apps
-5. [Installing latest OpenJDK](http://openjdk.java.net/install/) - For Java apps
+2. [Installing the AWS ECS CLI](https://github.com/aws/amazon-ecs-cli)
+3. [Installing Gradle](https://gradle.org/install/) - For Java apps
+4. [Installing Docker](https://docs.docker.com/engine/installation/)
+5. [Installing Python](https://www.python.org/downloads/) - For Python apps
+6. [Installing latest OpenJDK](http://openjdk.java.net/install/) - For Java apps
 
 
 
