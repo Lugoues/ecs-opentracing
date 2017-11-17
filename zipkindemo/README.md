@@ -27,7 +27,7 @@ aws ecr create-repository --repository-name demoapp
 aws ecr create-repository --repository-name backend-app
 ```
 
-## Build and push the demoapp Java microservice Image on ECR
+## Build and push the demoapp Java microservice Image to ECR
 ```
 java -version
 javac -version
@@ -44,7 +44,7 @@ docker tag demoapp:latest <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/demoa
 docker push <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/demoapp:latest
 ```
 
-## Build and push the demobackend Java microservice Image on ECR
+## Build and push the demobackend Java microservice Image to ECR
 ```
 java -version
 javac -version
