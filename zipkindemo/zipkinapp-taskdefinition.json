@@ -2,7 +2,7 @@
   "containerDefinitions": [
     {
       "name": "frontend",
-      "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/demoapp:latest",
+      "image": "<<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/demoapp:latest",
       "memory": 1024,
       "logConfiguration": {
         "logDriver": "awslogs",
@@ -26,7 +26,7 @@
     },
     {
     "name": "backend",
-    "image": "awsaccountid.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest",
+    "image": "<<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/backend-app:latest",
     "memory":1024,
     "logConfiguration": {
       "logDriver": "awslogs",
