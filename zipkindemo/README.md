@@ -73,7 +73,7 @@ aws ecs list-task-definitions --region us-east-1
 aws ecs list-clusters
 ```
 
-## Create a Cloudwatch log group and Run the Task on ECS
+## Create a Cloudwatch log group (if you have previously not created a log group called ecs-log-streaming) and Run the Task on ECS
 ```
 aws logs create-log-group --log-group-name ecs-log-streaming-zipkin
 aws ecs run-task --cluster ecs-opentracing-demo1  --task-definition zipkin-stack --count 1 --region us-east-1
