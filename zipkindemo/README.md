@@ -95,6 +95,7 @@ http://<<IP address of the task>>:9411
 
 ## Clean up
 1. Delete the Amazon ECS Cluster from the AWS management console or via AWS CLI as per http://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete_cluster.html
+2. Delete the EC2 instance launched via the ECS Cluster
 2. Delete the Repository from the AWS management ECS console or via AWS CLI
 3. Delete log group
 ```
