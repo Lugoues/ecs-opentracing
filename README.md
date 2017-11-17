@@ -9,18 +9,18 @@ From http://opentracing.io/documentation - What is a Trace ? At the highest leve
 
 Running a single container on a single server is easy. ECS is a cluster management service that helps you manage a group of clusters through a graphical user interface or by accessing a command line. With ECS you can install, operate, and scale your own cluster management infrastructure.
 
-This github repo demonstrates tracing of two sample applications, one in Java and another in Python deployed on ECS, using two  OpenTracing tracers, Zipkin - http://zipkin.io/ and Jaeger - https://uber.github.io/jaeger/. There are several supported Tracer implementations at http://opentracing.io/documentation/pages/supported-tracers.html. Both the Applications and the Opentracing tracers will run as Tasks on an Amazon ECS cluster.
+This github repo demonstrates tracing of two sample applications, one in Java and another in Python deployed on ECS, using two  OpenTracing tracers, Zipkin: http://zipkin.io/ and Jaeger: https://uber.github.io/jaeger/. There are several supported Tracer implementations at http://opentracing.io/documentation/pages/supported-tracers.html. Both the Applications and the Opentracing tracers will run as Tasks on an Amazon ECS cluster.
 
 1. [Tracing of an Java app on ECS using Zipkin](https://github.com/aws-samples/ecs-opentracing/tree/master/zipkindemo)
 2. [Tracing of an Python App on ECS using Jaeger](https://github.com/aws-samples/ecs-opentracing/tree/master/jaegerdemo)
 
 ## Prerequisites
 
-You will need to have the latest version of the AWS CLI and the following software:
+You will need to have the latest version of the AWS CLI, AWS ECS CLI and the following software:
 
 1. [Installing the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 2. [Installing the AWS ECS CLI](https://github.com/aws/amazon-ecs-cli)
-3. [Installing Gradle](https://gradle.org/install/) - For Java apps
+3. [Installing Gradle](https://gradle.org/install/) - For building Java apps
 4. [Installing Docker](https://docs.docker.com/engine/installation/)
 5. [Installing Python](https://www.python.org/downloads/) - For Python apps
 6. [Installing latest OpenJDK](http://openjdk.java.net/install/) - For Java apps
