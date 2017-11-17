@@ -30,7 +30,7 @@ aws ecr create-repository --repository-name psql-data
 aws ecr create-repository --repository-name jaegerapp
 ```
 
-## Build and push the Database Image to ECR
+## Build and push the Database image to ECR
 ```
 cd jaegerdemo
 cd db
@@ -49,27 +49,30 @@ docker push <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/psql-data:latest
 cd jaegerdemo
 cd app
 docker build -t jaegerapp .
+aws ecr describe-repositories
 docker tag jaegerapp:latest <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/jaegerapp:latest
 docker push <<awsaccountid>>.dkr.ecr.us-east-1.amazonaws.com/jaegerapp:latest
 ```
 
 ## Create a task definition
 
-Note: Go to the jaegerdemo directory and update the [jaeger-task-definition.json](https://github.com/aws-samples/ecs-opentracing/blob/master/jaegerdemo/jaeger-task-definition.json) file with the correct ECR image ids
+Note: Update the [jaeger-task-definition.json](./jaeger-task-definition.json) file and replace <<awsaccountid>> with the correct AWS account id.
 ```
+cd jaegerdemo
+aws ecr describe-repositories
 aws ecs register-task-definition --cli-input-json file://jaeger-task-definition.json
 aws ecs list-task-definitions --region us-east-1
 aws ecs list-clusters
 ```
 
-## Create a Cloudwatch log group and Run the Task on ECS
+## Create a Cloudwatch log group (if you have previously not created a log group called ecs-log-streaming) and Run the Task on ECS
 ```
 aws logs create-log-group --log-group-name ecs-log-streaming
 aws ecs run-task --cluster ecs-opentracing-jaeger  --task-definition jaeger-stack --count 1 --region us-east-1
 ```
 
 ## Test the applications 
-Note: Make sure security groups are open for the Jaeger and Application ports in the EC2 instance of the ECS Cluster
+Note: Make sure security groups are open for Inbound for the Jaeger and Application TCP ports:5000,16686 in the EC2 instance of the ECS Cluster
 
 ```
 Access the Application to generate some tracing data -
@@ -81,4 +84,9 @@ Access the Jaeger console on a browser - http://<<IP address>>:16686
 
 ## Clean up
 1. Delete the Amazon ECS Cluster from the AWS management console or via AWS CLI as per http://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete_cluster.html
+2. Delete the EC2 instance launched via the ECS Cluster
 2. Delete the Repository from the AWS management ECS console or via AWS CLI
+3. Delete log group
+```
+aws logs delete-log-group --log-group-name ecs-log-streaming-zipkin
+```
