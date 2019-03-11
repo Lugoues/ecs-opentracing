@@ -1,5 +1,5 @@
 ## opentracing-java-demo
-Opentracing of Java apps using Spring Boot and Sparkjava with Docker, running on Amazon ECS, using Opentracing with Jaeger. This is based on the project by https://github.com/mikelduke/opentracing-java-demo
+Opentracing of Java apps using Spring Boot and Sparkjava with Docker, running on Amazon ECS, using Opentracing with Jaeger. This is based on the project by https://github.com/mikelduke/opentracing-java-demo The two Java services run in two Docker containers and Jaeger runs in another container on ECS, as part of a single ECS Task. This demo assumes that everything is being deployed in **eu-west-1** AWS Region. This demo uses the **jaegertracing/all-in-one** Docker image, where all components run in a single container. Jaeger also supports Cassandra 3.x, ElasticSearch as persistent storage.
 
 The Spring Boot members app calls the Sparkjava vhs-catalog service to look up movie names rented by the customer.
 
