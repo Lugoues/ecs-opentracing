@@ -4,7 +4,7 @@ The Python app is based on https://github.com/bryanl/apptracing-py with changes 
 
 ## Instructions
 
-## Create an Amazon Elastic Container Registry (ECR) registry for the Database Microservice and the Python application Microservice
+## Create an Amazon Elastic Container Registry (ECR) repository for the Microservices
 Using the AWS management console or AWS CLI, create two ECR Registry entries: **psql-data** and **jaegerapp** to store the Docker images.
 
 ```
@@ -38,7 +38,7 @@ docker push <<awsaccountid>>.dkr.ecr.eu-west-1.amazonaws.com/jaegerapp:latest
 
 ## Create a task definition
 
-Note: Update the jaeger-task-definition.json file and replace <<awsaccountid>> with the correct AWS account id.
+Note: Update the [jaeger-task-definition.json](https://github.com/aws-samples/ecs-opentracing/blob/master/pythonapp/jaeger-task-definition.json) file and replace <<awsaccountid>> with the correct AWS account id.
 ```
 cd pythonapp
 aws ecr describe-repositories --region eu-west-1
