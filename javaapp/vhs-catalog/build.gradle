@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin: 'eclipse'
+apply plugin: 'java-library-distribution'
+
+group = 'com.mikelduke.vhs'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+  compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.2'
+  compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+  compile group: 'io.jaegertracing', name: 'jaeger-core', version: '0.29.0'
+  compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.0'
+  compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+  compile 'com.mikelduke:opentracing-sparkjava:1.0.1'
+  
+  testCompile group: 'junit', name: 'junit', version: '4.+'
+  testCompile 'com.mikelduke:jtest-data:0.0.1'
+
+  testRuntime 'com.mikelduke:jtest-data:0.0.1'
+}
+
+distZip.shouldRunAfter(build)
+
+task fatJar(type: Jar) {
+	manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',
+          'Implementation-Version': version,
+          'Main-Class': 'com.mikelduke.vhs.catalog.VHSCatalogApplication'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

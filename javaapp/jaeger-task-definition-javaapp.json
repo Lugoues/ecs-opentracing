@@ -1,0 +1,123 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "members",
+      "image": "accountid.dkr.ecr.eu-west-1.amazonaws.com/members:latest",
+      "memory":1024,
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "ecs-log-streaming2",
+          "awslogs-region": ""
+        }
+      },
+      "environment": [
+        {
+          "name": "MOVIESERVICE_DOMAIN",
+          "value": "vhscatalog"
+        },
+        {
+          "name": "MOVIESERVICE_PORT",
+          "value": "4567"
+        },
+        {
+          "name": "OPENTRACING_JAEGER_LOG_SPANS",
+          "value": "true"
+        },
+        {
+          "name": "OPENTRACING_JAEGER_UDP-SENDER_HOST",
+          "value": "jaeger"
+        },
+        {
+          "name": "OPENTRACING_JAEGER_UDP-SENDER_PORT",
+          "value": "6831"
+        }
+      ],
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort":8080,
+          "hostPort":8080,
+          "protocol": "tcp"
+        }
+      ],
+      "links": [
+        "jaeger",
+        "vhscatalog"
+      ]
+    },
+    {
+    "name": "vhscatalog",
+    "image": "accountid.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest",
+    "memory":1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming2",
+        "awslogs-region": "eu-west-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":4567,
+        "hostPort":8081,
+        "protocol": "tcp"
+      }
+    ],
+    "links": [
+      "jaeger"
+    ]
+    },
+    {
+    "name": "jaeger",
+    "image": "jaegertracing/all-in-one:latest",
+    "memory": 1024,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "ecs-log-streaming2",
+        "awslogs-region": "eu-west-1"
+      }
+    },
+    "essential": true,
+    "portMappings": [
+      {
+        "containerPort":5775,
+        "hostPort":5775,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":5778,
+        "hostPort":5778,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":6831,
+        "hostPort":6831,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":6832,
+        "hostPort":6832,
+        "protocol": "udp"
+      },
+      {
+        "containerPort":14268,
+        "hostPort":14268,
+        "protocol": "tcp"
+      },
+      {
+        "containerPort":16686,
+        "hostPort":16686,
+        "protocol": "tcp"
+      }
+
+    ]
+    }
+  ],
+  "volumes": [],
+  "networkMode": "bridge",
+  "placementConstraints": [],
+  "family": "jaeger-stack2"
+}
