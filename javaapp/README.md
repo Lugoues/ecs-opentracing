@@ -30,7 +30,7 @@ docker push <<accountid>>.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest
 ```
 ## Register the task definition with ECS
 
-Note: Update the jaeger-task-definition-javaapp.json file and replace <<awsaccountid>> with the correct AWS account id.
+Note: Update the [jaeger-task-definition-javaapp.json](https://github.com/aws-samples/ecs-opentracing/blob/master/javaapp/jaeger-task-definition-javaapp.json) file and replace <<awsaccountid>> with the correct AWS account id.
 ```
 aws ecr describe-repositories --region eu-west-1
 aws ecs register-task-definition --region eu-west-1 --cli-input-json file://jaeger-task-definition-javaapp.json
