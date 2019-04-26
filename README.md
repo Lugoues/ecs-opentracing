@@ -18,7 +18,7 @@ Note: If you create a single ECS Cluster, please run one app at a time, as there
 
 ## Prerequisites
 
-You will need to have the latest version of the AWS CLI, AWS ECS CLI and the following software:
+You will need to have the latest version of the AWS CLI, AWS ECS CLI and the following software installed on your laptop or development environment like AWS Cloud9:
 
 1. [Installing the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 2. [Installing the AWS ECS CLI](https://github.com/aws/amazon-ecs-cli)
