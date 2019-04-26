@@ -14,7 +14,8 @@ This github repo demonstrates tracing of two sample applications, one in Java an
 1. [Tracing of an Java app on ECS using Jaeger](https://github.com/aws-samples/ecs-opentracing/tree/master/javaapp)
 2. [Tracing of an Python App on ECS using Jaeger](https://github.com/aws-samples/ecs-opentracing/tree/master/pythonapp)
 
-Note: Run one app at a time, as there will be port conflicts, when both applications are run in the same ECS Cluster.
+Note: If you create a single ECS Cluster, please run one app at a time, as there will be port conflicts, when both Java and Python applications are run on the same cluster. Also, you will incur billing charges in your AWS account, when you run these samples.
+
 ## Prerequisites
 
 You will need to have the latest version of the AWS CLI, AWS ECS CLI and the following software:
