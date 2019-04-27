@@ -84,4 +84,4 @@ ecs-cli configure -cluster ecs-opentracing-jaeger --region eu-west-1
 ecs-cli up --keypair ecs-opentrace-key2 --capability-iam --size 1 --instance-type t2.large --port 22 --force --region eu-west-1
 ```
 
-Wait till you get a "Cluster creation succeeded" message.
+Wait till you get a **"Cluster creation succeeded"** message.
