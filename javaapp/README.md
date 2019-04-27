@@ -22,25 +22,28 @@ chmod +x ./vhs-catalog/gradlew
 aws ecr create-repository --region eu-west-1 --repository-name members
 aws ecr create-repository --region eu-west-1 --repository-name vhs-catalog
 ```
-**Make note of the <<accountid>>, this will be needed while pushing the docker images to ECR** 
   
 **Run the following command and run docker login command that was returned in the previous step. You should get a Login succeeded message. Refer https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-basics.html**
 ```
 aws ecr get-login --no-include-email --region eu-west-1
 ```
 
-**Push the docker images to ECR, replace <<accountid>> with the AWS account id** 
+**Push the docker images to ECR** 
 
 ```
-docker tag members:latest  <<accountid>>.dkr.ecr.eu-west-1.amazonaws.com/members:latest
-docker push <<accountid>>.dkr.ecr.eu-west-1.amazonaws.com/members:latest
+export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
+echo $ACCOUNT_ID
 
-docker tag vhs-catalog:latest <<accountid>>.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest
-docker push <<accountid>>.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest
+docker tag members:latest ${ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/members:latest
+docker push ${ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/members:latest
+
+docker tag vhs-catalog:latest ${ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest
+docker push ${ACCOUNT_ID}.dkr.ecr.eu-west-1.amazonaws.com/vhs-catalog:latest
 ```
 ## Register the task definition with ECS
 
-Note: Update the [jaeger-task-definition-javaapp.json](https://github.com/aws-samples/ecs-opentracing/blob/master/javaapp/jaeger-task-definition-javaapp.json) file and replace <<awsaccountid>> with the correct AWS account id.
+**Note: Update the [jaeger-task-definition-javaapp.json](https://github.com/aws-samples/ecs-opentracing/blob/master/javaapp/jaeger-task-definition-javaapp.json) file and replace "awsaccountid" with the AWS account id, for members and vhs-catalog images .**
+  
 ```
 aws ecr describe-repositories --region eu-west-1
 aws ecs register-task-definition --region eu-west-1 --cli-input-json file://jaeger-task-definition-javaapp.json
@@ -56,7 +59,7 @@ aws ecs run-task --cluster ecs-opentracing-jaeger  --task-definition jaeger-stac
 
 
 ## Test the applications
-Note: Make sure security groups are open for Inbound for the Jaeger and Application TCP ports:8000,8081,16686 in the EC2 instance of the ECS Cluster and your internet proxy allows access to these ports from your workplace.
+**Note: Make sure security groups are open for Inbound for the Jaeger and Application TCP ports:8000,8081,16686 in the EC2 instance of the ECS Cluster and your internet proxy allows access to these ports from your workplace.**
 
 ```
 Get the IP address of the running task
@@ -66,15 +69,18 @@ Access the Application to generate some tracing data -
 curl http://<<IP address of the Task>>:8080/members/
 curl http://<<IP address of the Task>>:8080/members/2/rentals
 curl http://<<IP address of the Task>>:8081/movies/1
-
-Access the Jaeger console on a browser - http://<<IP address  of the Task>>:16686
 ```
+![](jaeger-1.png)
+
+**Access the Jaeger console on a browser - http://<<IP address  of the Task>>:16686**
+
+![](jaeger-2.png)
 
 ## Clean up
 1. Delete the Amazon ECS Cluster from the AWS management console or via AWS CLI as per http://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete_cluster.html
 2. Delete the EC2 instance launched via the ECS Cluster
-2. Delete the Repository from the AWS management ECS console or via AWS CLI
-3. Delete log group
+2. Delete the Repository from the AWS management ECR console or via AWS CLI
+3. Delete Cloudwatch log group
 ```
 aws logs delete-log-group --log-group-name ecs-log-streaming2
 ```
