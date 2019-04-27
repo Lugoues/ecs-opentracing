@@ -7,6 +7,8 @@ The Spring Boot members app calls the Sparkjava vhs-catalog service to look up m
 
 ## Instructions
 
+**Note: The following instructions assume that the ECS Cluster has been setup as per the Prerequisites**
+
 ## Build the project
 Build both projects using gradle, then build docker containers.
 ```
