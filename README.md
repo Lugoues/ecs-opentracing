@@ -37,7 +37,9 @@ sudo chmod +x /usr/local/bin/ecs-cli
 
 sudo yum git docker
 ```
+
 ** For building the Java sample, we will need JDK 1.8 or higher and gradle **
+
 4. [Installing latest OpenJDK](http://openjdk.java.net/install/) or Amazon Corretto (https://aws.amazon.com/corretto/) - For Java apps
 
 **Remove the older OpenJDK 1.7 and install OpenJDK 1.8 on Linux**
