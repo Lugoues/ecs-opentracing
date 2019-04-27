@@ -22,10 +22,27 @@ You will need to have the latest version of the AWS CLI, AWS ECS CLI and the fol
 
 1. [Installing the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
 2. [Installing the AWS ECS CLI](https://github.com/aws/amazon-ecs-cli)
-3. [Installing Gradle](https://gradle.org/install/) - For building Java apps
-4. [Installing Docker](https://docs.docker.com/engine/installation/)
-5. [Installing Python](https://www.python.org/downloads/) - For Python apps
-6. [Installing latest OpenJDK](http://openjdk.java.net/install/) or Amazon Corretto (https://aws.amazon.com/corretto/) - For Java apps
+## Installation of ECS CLI on Linux 
+```
+sudo curl -so /usr/local/bin/ecs-cli https://s3.amazonaws.com/amazon-ecs-cli/ecs-cli-linux-amd64-latest
+sudo chmod +x /usr/local/bin/ecs-cli
+```
+3. [Installing Docker](https://docs.docker.com/engine/installation/)
+4. [Installing git](https://docs.docker.com/engine/installation/)
+## Installation of git and Docker on Linux
+```
+sudo yum install git docker
+```
+## For building the Java sample, we will need JDK 1.8 or higher
+4. [Installing latest OpenJDK](http://openjdk.java.net/install/) or Amazon Corretto (https://aws.amazon.com/corretto/) - For Java apps
+## Remove the older OpenJDK 1.7 and Installation of OpenJDK 1.8 on Linux
+```
+sudo yum remove java-1.7.0-openjdk
+sudo yum install java-1.8.0-openjdk-devel
+```
+5. [Installing Gradle](https://gradle.org/install/) - For building Java apps
+## For testing the Python sample, if its not already installed
+6. [Installing Python](https://www.python.org/downloads/) - For Python apps
 
 ## Creating an ECS Cluster with one EC2 Node
 
