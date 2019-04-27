@@ -59,7 +59,7 @@ aws ecs run-task --cluster ecs-opentracing-jaeger  --task-definition jaeger-stac
 
 
 ## Test the applications
-**Note: Make sure security groups are open for Inbound for the Jaeger and Application TCP ports:8000,8081,16686 in the EC2 instance of the ECS Cluster and your internet proxy allows access to these ports from your workplace.**
+**Note: Make sure security groups are open for Inbound for the Jaeger and Application TCP ports:8000,8081,16686 in the EC2 instance of the ECS Cluster and your internet proxy allows access to these ports in your workplace.**
 
 ```
 Get the IP address of the running task
@@ -72,7 +72,7 @@ curl http://<<IP address of the Task>>:8081/movies/1
 ```
 ![](jaeger-1.png)
 
-**Access the Jaeger console on a browser - http://<<IP address  of the Task>>:16686**
+**Access the Jaeger console on a browser - http://{IP address  of the Task}:16686**
 
 ![](jaeger-2.png)
 
