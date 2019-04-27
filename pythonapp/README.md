@@ -1,5 +1,5 @@
 ## Opentracing of a Python application using Jaeger on Amazon ECS
-**The Python app is based on **https://github.com/bryanl/apptracing-py** with changes to make it completely Dockerized. The Python web application running on ECS in multiple Docker containers and uses various python modules like flask, jaeger-client,a Postgresql database and Jaeger. 
+**The Python app is based on https://github.com/bryanl/apptracing-py** with changes to make it completely Dockerized. The Python web application running on ECS in multiple Docker containers and uses various python modules like flask, jaeger-client,a Postgresql database and Jaeger. 
 
 This demo assumes that everything is being deployed in **eu-west-1** AWS Region. This demo uses the **jaegertracing/all-in-one** Docker image, where all Jaeger components run in a single container. Jaeger also supports Cassandra 3.x, ElasticSearch as persistent storage.
 
