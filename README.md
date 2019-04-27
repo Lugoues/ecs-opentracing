@@ -11,6 +11,8 @@ Running a single docker container on a single server is easy. Amazon ECS is a cl
 
 This github repo demonstrates tracing of two sample applications, one in Java and another in Python deployed on ECS, using an OpenTracing tracer, CNCF Jaeger - https://www.jaegertracing.io/. Both the Applications and the Opentracing tracers will run as containers in a single Task on an Amazon ECS cluster.
 
+![](./pythonapp/jaeger-python-2.png)  
+
 1. [Tracing of an Java app on ECS using Jaeger](https://github.com/aws-samples/ecs-opentracing/tree/master/javaapp)
 2. [Tracing of an Python App on ECS using Jaeger](https://github.com/aws-samples/ecs-opentracing/tree/master/pythonapp)
 
