@@ -7,9 +7,9 @@ Opentracing is a vendor-neutral open standard for distributed tracing and is a C
 
 From https://opentracing.io/docs/overview/what-is-tracing/ - Distributed tracing, also called distributed request tracing, is a method used to profile and monitor applications, especially those built using a microservices architecture. Distributed tracing helps pinpoint where failures occur and what causes poor performance.
 
-Running a single docker container on a single server is easy. Amazon ECS is a cluster management service that helps you manage a group of clusters through a graphical user interface or by accessing a command line. With ECS you can install, operate, and scale your own cluster management infrastructure.
+Running a single docker container on a single server is easy. **[Amazon ECS](https://aws.amazon.com/ecs/) is a cluster management service that helps you manage a group of clusters through a graphical user interface or by accessing a command line. With ECS you can install, operate, and scale your own cluster management infrastructure.**
 
-This github repo demonstrates tracing of two sample applications, one in Java and another in Python deployed on ECS, using an OpenTracing tracer, CNCF Jaeger - https://www.jaegertracing.io/. Both the Applications and the Opentracing tracers will run as containers in a single Task on an Amazon ECS cluster.
+**This github repo demonstrates tracing of two sample applications, one in Java and another in Python deployed on ECS, using an OpenTracing tracer, CNCF Jaeger - https://www.jaegertracing.io/. Both the Applications and the Opentracing tracers will run as containers in a single Task on an Amazon ECS cluster.**
 
 ![](./pythonapp/jaeger-python-2.png)  
 
